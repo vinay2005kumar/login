@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="copy.css">
+</head>
+<body>
+    <div class="login-box" id="login">
+        <form action="https://script.google.com/macros/s/AKfycbwKUNhwcl5Wuvvf6vH09HI2AmleCotefm1zRawhDG3cYRY3bbtpl63iGY9IpDMzsIXW/exec" name="submit-to-google-sheet" id="form" method="POST">
+            <h2>Login</h2>
+            <div class="input-box">
+                <input type="email" required placeholder=" " name="email">
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <input type="password" required placeholder=" " name="password">
+                <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox">Remember me
+                </label>
+                <a href="#">Forgot Password</a>
+            </div><br>
+           <center> <input type="submit" name="submit" value="Login" class="button-73"></center>
+            <div class="register-link">
+                <p style="display: inline;">Don't have an account?
+                </p><a href="#" onclick="toggle2()">Register</a>
+            </div>
+        </form>
+    </div>
+    <div class="login-box register" id="register">
+        <form action="https://script.google.com/macros/s/AKfycbwKUNhwcl5Wuvvf6vH09HI2AmleCotefm1zRawhDG3cYRY3bbtpl63iGY9IpDMzsIXW/exec" name="submit-to-google-sheet" id="form" method="POST">
+            <h2>Register</h2>
+            <div class="input-box">
+                <input type="text" required placeholder=" " name="fname">
+                <label>Name</label>
+            </div>
+            <div class="input-box">
+                <input type="email" required placeholder=" " name="email">
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <input type="password" required placeholder=" " name="password">
+                <label>Password</label>
+            </div>
+           <center> <input type="submit" name="submit" value="Register" class="button-73"></center>
+            <div class="register-link">
+                <p style="display: inline;font-size: 15px;">Already have an account??
+                </p><a href="#" onclick="toggle()">Login</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwKUNhwcl5Wuvvf6vH09HI2AmleCotefm1zRawhDG3cYRY3bbtpl63iGY9IpDMzsIXW/exec';
+        const form = document.getElementById('form');
+        const submitButton = form.querySelector('[type="submit"]');
+       const n=new FormData(form)
+       console.log(n)
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+    
+            // Disable the submit button to prevent multiple submissions
+            submitButton.disabled = true;
+        
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)
+        })
+                .then(response => {
+                    console.log('Success!', response);
+                    // Reset the form after successful submission
+                    form.reset();
+                    // Re-enable the submit button
+                    submitButton.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    // Re-enable the submit button in case of error
+                    submitButton.disabled = false;
+                });
+        });
+        function toggle(){
+            document.getElementById('register').style.display='none';
+            document.getElementById('login').style.display='block'
+        }
+        function toggle2(){
+                  document.getElementById('register').style.display='block';
+            document.getElementById('login').style.display='none'
+        }
+    </script>
+    
+</body>
+</html>
